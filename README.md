@@ -21,3 +21,5 @@ For help getting started with Flutter development, view the
 [Provider](https://pub.dev/packages/provider), 
 [intl](https://pub.dev/packages/intl),
 [ListView.builder constructor](https://api.flutter.dev/flutter/widgets/ListView/ListView.builder.html),
+![Simulator Screen Shot - iPhone 14 Pro - 2023-06-06 at 11 34 46](https://github.com/sedsax/todo_persembe/assets/44877350/ef20ae70-6958-466e-b82b-374e4a1207b4)
+
