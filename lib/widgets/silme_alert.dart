@@ -10,8 +10,13 @@ class DialogUtil {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Görevi Sil'),
-          content: const Text('Bu görevi silmek istediğinizden emin misiniz?'),
+          icon: const Icon(Icons.question_mark),
+          iconColor:  Color.fromARGB(255, 215, 189, 154),
+          backgroundColor:  Colors.white,
+          title: Container(
+            color: Color.fromARGB(255, 215, 189, 154),
+            child: const Text('Görevi Sil', style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
+          content: const Text('Bu görevi silmek istediğinizden emin misiniz?', style: TextStyle(color:Color.fromARGB(255, 215, 189, 154),fontWeight: FontWeight.bold),),
           actions: [
             TextButton(
               child: const Text('İptal'),

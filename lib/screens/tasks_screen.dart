@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_persembe/models/task_data.dart';
 import 'package:todo_persembe/screens/add_task_screen.dart';
-import 'package:todo_persembe/screens/deneme.dart';
 import 'package:todo_persembe/screens/done_tasks.dart';
 import 'package:todo_persembe/widgets/tasks_list.dart';
 
@@ -14,7 +13,6 @@ class TasksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: app_theme_color,
       floatingActionButton: FloatingActionButton(
@@ -47,7 +45,7 @@ class TasksScreen extends StatelessWidget {
                     icon: const Icon(Icons.list),
                     onPressed: () {
                       // AlertDialog oluşturup, iki sayfayı liste olarak göster
-                      MenuShowDialog(context);
+                      menuShowDialog(context);
                     },
                     iconSize: 30.0,
                     color: app_theme_color,
@@ -76,7 +74,7 @@ class TasksScreen extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-             // padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              // padding: const EdgeInsets.symmetric(horizontal: 20.0),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -92,53 +90,98 @@ class TasksScreen extends StatelessWidget {
     );
   }
 
-  Future<dynamic> MenuShowDialog(BuildContext context) {
+  Future<dynamic> menuShowDialog(BuildContext context) {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text(
-            'Sayfa Seçin',
-            style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-                color: app_theme_color),
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(4),
           ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ListTile(
-                title: const Text(
-                  'Tamamlanan Görevler',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const DoneTasks())).then((value) => Navigator.pop(context) // Alert dialogu kapat),
-                  );
-                 // Navigator.pop(context);
-                },
+          child: Expanded(
+            child: SizedBox(
+              height: 200,
+              child: Column(
+                children: [
+                  const Icon(
+                    Icons.find_in_page_outlined,
+                    color: app_theme_color,
+                    size: 60,
+                  ),
+                  Expanded(
+                    child: Container(
+                      color: app_theme_color,
+                      child: SizedBox.expand(
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Column(
+                            children: [
+                              const Text(
+                                "Sayfalar",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,fontSize: 20),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const DoneTasks())).then((value) => Navigator.pop(context));
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.white,
+                                        ),
+                                        child: const Text("Tamamlanan\nGörevler",
+                                            style: TextStyle(
+                                                color: app_theme_color,
+                                                fontWeight: FontWeight.bold)
+                                          )
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10,),
+                                  Expanded(
+                                    child: ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const NotDoneTasks())).then((value) => Navigator.pop(context));
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.white,
+                                        ),
+                                        child: const Text("Yapılacak\nGörevler",
+                                            style: TextStyle(
+                                                color: app_theme_color,
+                                                fontWeight: FontWeight.bold)
+                                        )
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              ListTile(
-                title: const Text(
-                  'Yapılacak Görevler',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const NotDoneTasks())).then((value) => Navigator.pop(context),
-                  );
-                },
-              ),
-            ],
+            ),
           ),
         );
       },
     );
   }
-
-  
 }
