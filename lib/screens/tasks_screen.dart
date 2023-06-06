@@ -35,10 +35,33 @@ class TasksScreen extends StatelessWidget {
           Container(
             padding: const EdgeInsets.only(
                 top: 60.0, left: 30.0, right: 30.0, bottom: 30.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Row(
+             //crossAxisAlignment: CrossAxisAlignment.start,
+             mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CircleAvatar(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                  'Ajanda',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 50.0,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                SizedBox(height: 10,),
+                Text(
+                  '${Provider.of<TaskData>(context).taskCount} Görev',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
+                  ],
+                ),
+                    CircleAvatar(
                   backgroundColor: Colors.white,
                   radius: 30.0,
                   child: IconButton(
@@ -49,24 +72,6 @@ class TasksScreen extends StatelessWidget {
                     },
                     iconSize: 30.0,
                     color: app_theme_color,
-                  ),
-                ),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                const Text(
-                  'Ajanda',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 50.0,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                Text(
-                  '${Provider.of<TaskData>(context).taskCount} Görev',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
                   ),
                 ),
               ],
