@@ -5,7 +5,6 @@ import 'package:todo_persembe/widgets/silme_alert.dart';
 
 import '../widgets/not_done_task_tile.dart';
 
-
 class NotDoneTasks extends StatelessWidget {
   const NotDoneTasks({super.key});
   static const Color app_theme_color = Color.fromARGB(255, 215, 189, 154);
@@ -13,40 +12,53 @@ class NotDoneTasks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-      appBar: AppBar(
-        backgroundColor: app_theme_color,
-        title: Text('Yapılacak Görevler'),
-      ),
-      body: Consumer<TaskData>(
-        builder: (context, taskData, child){
-          if (taskData.toDoTaskCount != 0) {
-          return Padding(
-            padding: const EdgeInsets.all(10),
-            child: ListView.builder(
-              itemBuilder: (context, index) {
-                final task = taskData.toDoTasks[index];
-                return NotDoneTaskTile(
-                  taskTitle: task.name,
-                  taskContent: task.content,
-                  taskDate: task.taskDate,
-                  longPressCallback: () {
-                    //taskData.deleteTask(task);
-                    DialogUtil.showDeleteConfirmationDialog(context, taskData, task);
-                  }, 
-                );
-              },
-              itemCount: taskData.toDoTaskCount,
+        appBar: AppBar(
+          backgroundColor: app_theme_color,
+          title: const Text('Yapılacak Görevler'),
+          actions: [
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Text(
+                  '${Provider.of<TaskData>(context).toDoTaskCount} Görev',
+                  style: const TextStyle(
+                    color: Colors.red,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
+              ),
             ),
-          );
-        } else {
-          return Center(
-            child: Image.asset('assets/ajanda.png'),
-          );
-        }
-        },
-        
-        )
-    );
+          ],
+        ),
+        body: Consumer<TaskData>(
+          builder: (context, taskData, child) {
+            if (taskData.toDoTaskCount != 0) {
+              return Padding(
+                padding: const EdgeInsets.all(10),
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    final task = taskData.toDoTasks[index];
+                    return NotDoneTaskTile(
+                      taskTitle: task.name,
+                      taskContent: task.content,
+                      taskDate: task.taskDate,
+                      longPressCallback: () {
+                        //taskData.deleteTask(task);
+                        DialogUtil.showDeleteConfirmationDialog(
+                            context, taskData, task);
+                      },
+                    );
+                  },
+                  itemCount: taskData.toDoTaskCount,
+                ),
+              );
+            } else {
+              return Center(
+                child: Image.asset('assets/ajanda.png'),
+              );
+            }
+          },
+        ));
   }
 }

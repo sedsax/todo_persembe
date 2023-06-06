@@ -19,6 +19,21 @@ class DoneTasks extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: app_theme_color,
           title: Text('Tamamlanan Görevler'),
+          actions: [
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Text(
+                      '${Provider.of<TaskData>(context).completedTaskCount} Görev',
+                      style: const TextStyle(
+                        color: Colors.green,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+              ),
+            ),
+          ],
         ),
         body: Consumer<TaskData>(
           builder: (context, taskData, child) {
